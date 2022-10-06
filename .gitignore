@@ -1,52 +1,155 @@
-# Prerequisites
-*.d
+// Arthur Reisswitz
 
-# Object files
-*.o
-*.ko
-*.obj
-*.elf
+/*Esse programa realiza calculos matematicos simples a partir das dadas entradas do usuario*/
 
-# Linker output
-*.ilk
-*.map
-*.exp
+// Bibliotecas usadas
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+#include <string.h>
 
-# Precompiled Headers
-*.gch
-*.pch
+int main()
+{
+    // Declaracao de variaveis
+    // Foram usadas variaveis em do tipo double para que nao haja erro na execucao das funcoes usadas da biblioteca math.h.
+    double valor_a=0;
+    double valor_b=0;
+    double resultado=0;
+    int aux=1;
+    char operacao;
 
-# Libraries
-*.lib
-*.a
-*.la
-*.lo
+    // Mostra no console as informacoes iniciais do autor
+    printf("Arthur do Nascimento Von Reisswitz\n");
+    printf("Gestao de TI\n");
+    printf("UNILASSALE\n");
+    printf("202212848\n\n");
+    printf("Pressione enter para continuar");
 
-# Shared objects (inc. Windows DLLs)
-*.dll
-*.so
-*.so.*
-*.dylib
+    // Espera que o usuario aperte a tecla enter
+    getchar();
+    fflush(stdin);
+    system("cls");
 
-# Executables
-*.exe
-*.out
-*.app
-*.i*86
-*.x86_64
-*.hex
+    // Loop principal do programa. Reliza operacoes matematicas a partir da escolha do usuario e dos numeros informados ate que seja selecionada a opcao de sair.
+    do{
+        // Mostra no console o menu de opcoes.
+        printf("== Selecione uma das operacoes disponiveis ==\n");
+        printf("SOMAR(+)\n");
+        printf("SUBTRAIR(-)\n");
+        printf("MULTIPLICAR(*)\n");
+        printf("DIVIDIR(/)\n");
+        printf("POTENCIA(^)\n");
+        printf("RAIZ QUADRADA(r)\n");
+        printf("SAIR(x)\n");
 
-# Debug files
-*.dSYM/
-*.su
-*.idb
-*.pdb
+        // Espera a opcao de operacao que sera feita pelo usuario
+        operacao = getchar();
+        fflush(stdin);
 
-# Kernel Module Compile Results
-*.mod*
-*.cmd
-.tmp_versions/
-modules.order
-Module.symvers
-Mkfile.old
-dkms.conf
+        // Seleciona o calculo a ser feito a partir da opcao do usuario
+        switch(operacao){
+            case '+': // Adicao
+                printf("\nInforme o primeiro valor da soma:\n");
+                scanf("%lf", &valor_a);
+                printf("\nInforme o segundo valor da soma:\n");
+                scanf("%lf", &valor_b);
+
+                resultado = valor_a + valor_b;
+
+                printf("\nResultado da soma: %.2lf", resultado);
+                break;
+
+            case '-': // Subtracao
+                printf("\nInforme o primeiro valor da subtracao:\n");
+                scanf("%lf", &valor_a);
+                printf("\nInforme o segundo valor da subtracao:\n");
+                scanf("%lf", &valor_b);
+
+                resultado = valor_a - valor_b;
+
+                printf("\nResultado da subtracao: %.2lf", resultado);
+                break;
+
+            case '*': // Multiplicacao
+                printf("\nInforme o primeiro valor da multiplicacao:\n");
+                scanf("%lf", &valor_a);
+                printf("\nInforme o segundo valor da multiplicacao:\n");
+                scanf("%lf", &valor_b);
+
+                resultado = valor_a * valor_b;
+
+                printf("\nResultado da multiplicacao: %.2lf", resultado);
+                break;
+
+            case '/': // Divisao
+                printf("\nInforme o dividendo:\n");
+                scanf("%lf", &valor_a);
+                printf("\nInforme o divisor:\n");
+                scanf("%lf", &valor_b);
+
+                // Teste para caso o valor do divisor seja igual a zero
+                if(valor_b == 0){
+                    while(valor_b == 0){
+                        printf("\nO divisor precisa ser diferente de zero. Por favor, informe um divisor novamente:\n");
+                        scanf("%lf", &valor_b);
+                        printf("\n");
+                    }
+                }
+
+                resultado = valor_a / valor_b;
+
+                printf("\nResultado da divisao: %.2lf", resultado);
+                break;
+
+            case '^': // Potenciacao
+                printf("\nInforme o base da potencia:\n");
+                scanf("%lf", &valor_a);
+                printf("\nInforme o expoente:\n");
+                scanf("%lf", &valor_b);
+
+                resultado = pow(valor_a, valor_b);
+
+                printf("\nResultado da potenciacao: %.2lf", resultado);
+                break;
+
+            case 'r': // Radiciacao
+                printf("\nInforme o radiciando:\n");
+                scanf("%lf", &valor_a);
+
+                // Teste para caso o valor do radiciando seja menor que zero
+                if(valor_a < 0){
+                    while(valor_a < 0){
+                        printf("\nO radiciando precisa ser diferente maior que zero. Por favor, informe um novo radidiando:\n");
+                        scanf("%lf", &valor_a);
+                        printf("\n");
+                    }
+                }
+
+                valor_a = sqrt(valor_a);
+
+                printf("\nResultado da potenciacao: %.2lf", valor_a);
+                break;
+
+            case 'x': // Opcao de sair do loop
+                aux = 0;
+                printf("\nVoce optou por sair do programa!\n");
+                break;
+
+            default: // Trata o caso da opcao escolhida nao existir
+                system("cls");
+                printf("Essa operacao nao esta definida. Por favor, escolha uma das opcoes validas do menu!\n");
+        }
+
+            printf("\nPressione enter para continuar");
+            fflush(stdin);
+            getchar();
+            fflush(stdin);
+            system("cls");
+
+    }while(aux);
+
+    system("cls");
+    printf("FIM DO PROGRAMA");
+
+    return(0);
+}
